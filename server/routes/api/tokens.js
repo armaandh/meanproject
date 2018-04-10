@@ -15,9 +15,13 @@ apiRoutes.post('/register', function(req, res) {
         var newUser = new User({
             email: req.body.email,
             password: req.body.password,
-            username: req.body.username,
             firstName: req.body.firstName,
-            lastName: req.body.lastName 
+            lastName: req.body.lastName,
+            street: req.body.street,
+            city: req.body.city,
+            province: req.body.province,
+            postal: req.body.postal,
+            country: req.body.country 
         });
 
 	 // Attempt to save the new user
@@ -38,7 +42,7 @@ apiRoutes.post('/register', function(req, res) {
 
 // authenticate user and obtain token
 apiRoutes.post('/authenticate', function(req, res) {
-    User.findOne({username: req.body.username}, function(err, user) {
+    User.findOne({email: req.body.email}, function(err, user) {
         if (err) throw err;
 
         if (!user) {

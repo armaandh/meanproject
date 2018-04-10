@@ -3,15 +3,14 @@ var router = express.Router();
 var passport = require('passport');
 
 
-var Student = require('../../models/student');
+var User = require('../../models/user');
 
-// get all students
-router.get('/students', passport.authenticate('jwt', {session: false}), function(req, res) {
-    Student.find(function(err, students) {
+// get all users
+router.get('/users', function(req, res) {
+    User.find(function(err, users) {
         if (err)
             res.send(err);
-
-        res.json(students);
+        res.json(users);
     });
 });
 
@@ -89,13 +88,13 @@ router.put('/students/:id', passport.authenticate('jwt', {session: false}), func
 });
 
 // delete student
-router.delete('/students/:id', passport.authenticate('jwt', {session: false}), function(req, res) {
-    Student.remove({
+router.delete('/users/:id', function(req, res) {
+    User.remove({
         _id: req.params.id
-    }, function(err, student) {
+    }, function(err, user) {
         if (err) res.send(err);
 
-        res.json({ message: 'Successfully deleted student' });
+        res.json({ message: 'Successfully deleted user' });
     });
 });
 

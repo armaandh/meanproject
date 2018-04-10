@@ -20,11 +20,16 @@ router.post('/register', function(req, res) {
     var firstName = req.body.firstName;
     var lastName = req.body.lastName;
     var email = req.body.email;
-    var username = req.body.username; 
+    //var username = req.body.username; 
     var password = req.body.password;
-    var password2 = req.body.password2;
+    var street = req.body.street;
+    var city = req.body.city;
+    var province = req.body.province;
+    var postal = req.body.postal;
+    var country = req.body.country;
+    //var password2 = req.body.password2;
 
-    // validation
+    // validation: Re-enable after!
     //req.checkBody('name', 'Name is required').notEmpty();
    // req.checkBody('email', 'Email is required').notEmpty();
     //req.checkBody('email', 'Email is not valid').isEmail();
@@ -40,10 +45,15 @@ router.post('/register', function(req, res) {
         })
     } else {
         var newUser = new User({
-            name: firstName,
             email: email,
-            username: username,
-            password: password
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            street: street,
+            city: city,
+            province: province,
+            postal: postal,
+            country: country 
         });
 
         User.createUser(newUser, function(err, user) {
@@ -57,8 +67,8 @@ router.post('/register', function(req, res) {
 });
 
 passport.use(new LocalStrategy(
-    function(username, password, done) {
-        User.getUserByUsername(username, function(err, user) {
+    function(email, password, done) {
+        User.getUserByEmail(email, function(err, user) {
             if (err) throw err;
             if (!user) {
                 return done(null, false, {message: 'Unknown User'});

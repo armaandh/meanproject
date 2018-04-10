@@ -9,8 +9,8 @@ import { appConfig } from '../app.config';
 export class AuthenticationService {
     constructor(private http: HttpClient) { }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(appConfig.apiUrl + '/token/authenticate', { username: username, password: password })
+    login(email: string, password: string) {
+        return this.http.post<any>(appConfig.apiUrl + '/token/authenticate', { email: email, password: password })
             .map(user => {
                 // login successful if there's a jwt token in the response
                 console.log("NOT YET");

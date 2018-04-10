@@ -9,7 +9,8 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get<User[]>(appConfig.apiUrl + '/users');
+        // /api refers to students.js
+        return this.http.get<User[]>(appConfig.apiUrl + '/api/users');
     }
 
     getById(_id: string) {
@@ -25,6 +26,6 @@ export class UserService {
     }
 
     delete(_id: string) {
-        return this.http.delete(appConfig.apiUrl + '/users/' + _id);
+        return this.http.delete(appConfig.apiUrl + '/api/users/' + _id);
     }
 }
