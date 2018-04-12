@@ -9,7 +9,7 @@ var session = require('express-session');
 var config = require('./config/');
 var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
-mongoose.connect(config.database);
+mongoose.connect(config.database_mlab);
 var db = mongoose.connection;
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy; 

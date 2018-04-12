@@ -31,14 +31,15 @@ router.get("/boats/:id", (req, res, next) => {
 router.post("/boats", (req, res, next) => {
     var boat = req.body;
 
-    if (!product.product || !product.category
-        || !product.price)  {
+    if (!boat.BoatName || !boat.BoatLengthInFeet
+        || !boat.BoatYear || !boat.BoatCapacityInPeople ||
+        !boat.BoatPictureUrl || !boat.IsRented)  {
         res.status(400);
         res.json(
             {"error": "Bad data, could not be inserted into the database."}
         )
     } else {
-        db.products.save(product, function(err, data) {
+        db.boats.save(boat, function(err, data) {
             if (err) {
                 res.send(err);
             }
@@ -47,48 +48,58 @@ router.post("/boats", (req, res, next) => {
     }
 });
 
-// update student
-router.put('/students/:id', passport.authenticate('jwt', {session: false}), function(req, res) {
-
-    if (!req.body.FirstName 
-            || !req.body.LastName 
-            || !req.body.School
-            || !req.body.StartDate) {
-        res.status(400);
-        res.json(
-            {error: "Bad data, could not update."}
-        );
-    } else {
-        Student.findById(req.params.id, function(err, student) {
-            if (err) res.send(err);
-
-            student.FirstName = req.body.FirstName;
-            student.LastName = req.body.LastName;
-            student.School = req.body.School;
-            student.StartDate = req.body.StartDate;
-
-            console.log("STUDENT: " + student);
-
-            // save the bear
-            student.save(function(err, data, numAffected) {
-                if (err) res.send(err);
-
-                //res.json({ message: 'Student updated!' });
-                res.json(data);
-            });
-        });
-    }
+// delete boat
+router.delete("/boats/:id", (req, res, next) => {
+    db.boats.remove({_id: mongojs.ObjectId(req.params.id)},function(err, data){
+        if (err) {
+            res.send(err);
+        }
+        res.json(data);
+    });
 });
 
-// delete student
-router.delete('/users/:id', function(req, res) {
-    User.remove({
-        _id: req.params.id
-    }, function(err, user) {
-        if (err) res.send(err);
+// update boat 
+router.put("/boats/:id", (req, res, next) => {
+    var boats = req.body;
+    var changedBoat = {};
 
-        res.json({ message: 'Successfully deleted user' });
-    });
+    if (boats.BoatName) {
+        changedBoat.BoatName = boats.BoatName;
+    }
+
+    if (boats.BoatCapacityInPeople) {
+        changedBoat.BoatCapacityInPeople = boats.BoatCapacityInPeople;
+    }
+
+    if (boats.BoatLengthInFeet) {
+        changedBoat.BoatLengthInFeet = boats.BoatLengthInFeet
+    }
+
+    if(boats.BoatPictureUrl) {
+        changedBoat.BoatPictureUrl = boats.BoatPictureUrl
+    }
+
+    if(boats.BoatYear) {
+        changedBoat.BoatYear = boats.BoatYear
+    }
+
+    if(boats.IsRented) {
+        changedBoat.IsRented = boats.IsRented
+    }
+
+    if (Object.keys(changedBoat).length==0) {
+        res.status(400);
+        res.json(
+            {"error": "Bad Data"}
+        )        
+    } else {
+        db.boats.update({_id: mongojs.ObjectId(req.params.id)}, changedBoat,{},function(err, data){
+            if (err) {
+                res.send(err);
+            }
+            res.json(data);
+        });
+    }
 });
 
 module.exports = router;
