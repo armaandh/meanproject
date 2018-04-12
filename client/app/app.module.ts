@@ -13,6 +13,8 @@ import { AlertService, AuthenticationService, UserService } from './_services/in
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
+import {BoatService} from './_services/boat.service';
+
 
 @NgModule({
     imports: [
@@ -34,7 +36,8 @@ import { RegisterComponent } from './register/index';
         AuthenticationService,
         UserService,
         JwtInterceptorProvider,
-        ErrorInterceptorProvider
+        ErrorInterceptorProvider,
+        BoatService
     ],
     bootstrap: [AppComponent]
 })

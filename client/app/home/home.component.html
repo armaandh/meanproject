@@ -7,6 +7,27 @@
             {{user.email}} ({{user.firstName}} {{user.lastName}})
             - <a (click)="deleteUser(user._id)">Delete</a>
         </li>
+        <h2>List of Boats</h2>
+        <p><a [routerLink]="['/addboat']">Add New Boat</a></p>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Boat Year</th>
+                <th>Boat Length (ft)</th>
+                <th>Boat Max Capacity</th>
+                <th>Boat Picture Url</th>
+                <th>Rented Out</th>
+              </tr>
+              <tr *ngFor="let boat of boats">
+                <td>{{boat.BoatName}}</td>
+                <td>{{boat.BoatYear}}</td>
+                <td>{{boat.BoatLengthInFeet}}</td>
+                <td>{{boat.BoatCapacityInPeople}}</td>
+                <td>{{boat.BoatPictureUrl}}</td>
+                <td>{{boat.IsRented}}</td>
+                <td><a [routerLink] ="['/rent']">Rent!</a></td>
+              </tr>
+        </table>
     </ul>
     <p><a [routerLink]="['/login']">Logout</a></p>
 </div>

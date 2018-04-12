@@ -13,10 +13,10 @@ mongoose.connect(config.database);
 var db = mongoose.connection;
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy; 
-
-
+var boat = require('./routes/boat');
 var routes = require('./routes/');
 var users = require('./routes/users');
+//var boats = require('./routes/boat');
 var studentsApi = require('./routes/api/students');
 var tokensApi = require('./routes/api/tokens');
 
@@ -100,9 +100,14 @@ app.use(function(req, res, next) {
 app.use('/users', users);
 app.use('/api', studentsApi);
 app.use('/token', tokensApi);
-
-
-
+app.use('/api', boat);
+//app.use('/api/boats', boats);
+/*
+var boats_json = require("./data/boats.json");
+app.get("/api/boats",function(req,res,next) {
+        res.json(boats_json);
+});
+*/
 // set passport
 app.set('port', config.port);
 
