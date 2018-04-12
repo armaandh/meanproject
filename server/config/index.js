@@ -1,6 +1,6 @@
 module.exports = {  
     // Database connection information
-    'database': 'mongodb://localhost/loginapp',
+    'database': 'mongodb://bcit:bcit123@ds235708.mlab.com:35708/armaanbcit',
 
     // Setting port for server
     'port': process.env.PORT || 3000,

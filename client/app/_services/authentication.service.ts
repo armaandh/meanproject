@@ -14,11 +14,17 @@ export class AuthenticationService {
             .map(user => {
                 // login successful if there's a jwt token in the response
                 console.log("NOT YET");
-                if (user && user.token) {
+                if (user && user.token && user.role == "member") {
                     console.log("GOT TOKEN");
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
-                }
+                    localStorage.setItem('role', 'member');
+                } else if (user && user.token && user.role == "admin") {
+                    console.log("GOT TOKEN");
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    localStorage.setItem('role', 'admin');
+                } 
 
                 return user;
             });
