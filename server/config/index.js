@@ -1,7 +1,11 @@
 module.exports = {
     // Database connection information
+<<<<<<< HEAD
   'database_mlab': 'mongodb://bcit:bcit123@ds235708.mlab.com:35708/armaanbcit',
   'database_local': 'boats',
+=======
+    'database': 'mongodb://bcit:bcit123@ds235708.mlab.com:35708/armaanbcit',
+>>>>>>> 9748d46c23ebe57eca8757e3b125785bf87ef5c3
 
   // Setting port for server
   'port': process.env.PORT || 3000, 
