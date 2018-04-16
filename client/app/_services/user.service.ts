@@ -28,4 +28,6 @@ export class UserService {
     delete(_id: string) {
         return this.http.delete(appConfig.apiUrl + '/api/users/' + _id);
     }
+
+    
 }

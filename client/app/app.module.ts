@@ -14,6 +14,7 @@ import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import {BoatService} from './_services/boat.service';
+import {AddBoatComponent} from './addboat/index';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {BoatService} from './_services/boat.service';
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        AddBoatComponent
     ],
     providers: [
         AuthGuard,

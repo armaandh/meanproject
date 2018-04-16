@@ -55,7 +55,29 @@ router.delete("/boats/:id", (req, res, next) => {
             res.send(err);
         }
         res.json(data);
+
+
     });
+});
+
+// Rent Boat
+router.get("/boats/rent/:id", (req, res, next) => {
+    db.boats.update({_id: mongojs.ObjectId(req.params.id)}, {$set: {"IsRented":"Yes"}},function(err, data){
+        if (err) {
+            res.send(err);
+        }
+        res.json(data);
+    });
+});
+
+//Un-Rent Boaty
+router.get("/boats/expire/:id",(req,res,next) => {
+db.boats.update({_id: mongojs.ObjectId(req.params.id)}, {$set: {"IsRented":"No"}},function(err, data){
+    if (err) {
+        res.send(err);
+    }
+    res.json(data);
+});
 });
 
 // update boat 

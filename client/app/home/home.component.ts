@@ -12,9 +12,11 @@ import { UserService } from '../_services/index';
 export class HomeComponent implements OnInit {
     currentUser: User;
     boatService: BoatService;
-
+    //adminVisible: true;
     users: User[] = [];
     boats: Boat[] = [];
+    adminVisible = true;
+
 
     constructor(private userService: UserService, boatService: BoatService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -27,6 +29,24 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.loadAllUsers();
+    }
+
+    authorizeBoat() {
+        if(this.currentUser.role == "member" )
+        {
+            this.adminVisible = !this.adminVisible;
+        }
+    }
+
+    rentBoat(_id: string) {
+        this.boatService.rentBoat(_id).subscribe(() => {this.rentBoat(_id) });
+        this.loadAllBoats();
+    }
+
+    expireBoat(_id: string) {
+        this.loadAllBoats();
+        this.boatService.expireBoat(_id).subscribe(()=> {this.expireBoat(_id)});
+        
     }
 
     deleteUser(_id: string) {

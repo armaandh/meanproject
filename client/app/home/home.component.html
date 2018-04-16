@@ -6,9 +6,12 @@
         <li *ngFor="let user of users">
             {{user.email}} ({{user.firstName}} {{user.lastName}})
             - <a (click)="deleteUser(user._id)">Delete</a>
-        </li>
-        <h2>List of Boats</h2>
+        </li>        <h2>List of Boats</h2>
+
+        <!-- TODO: Boat Add Only for Admin -->
+        <div *ngIf="adminVisible">
         <p><a [routerLink]="['/addboat']">Add New Boat</a></p>
+        </div>
         <table>
             <tr>
                 <th>Name</th>
@@ -25,7 +28,9 @@
                 <td>{{boat.BoatCapacityInPeople}}</td>
                 <td>{{boat.BoatPictureUrl}}</td>
                 <td>{{boat.IsRented}}</td>
-                <td><a [routerLink] ="['/rent']">Rent!</a></td>
+                <!-- TODO: Boat Rent Only For Member -->
+                <td><a (click)="rentBoat(boat._id)">Rent!</a></td>
+                <td><a (click)="expireBoat(boat._id)">Undo.</a></td>
               </tr>
         </table>
     </ul>

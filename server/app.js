@@ -101,13 +101,7 @@ app.use('/users', users);
 app.use('/api', studentsApi);
 app.use('/token', tokensApi);
 app.use('/api', boat);
-//app.use('/api/boats', boats);
-/*
-var boats_json = require("./data/boats.json");
-app.get("/api/boats",function(req,res,next) {
-        res.json(boats_json);
-});
-*/
+
 // set passport
 app.set('port', config.port);
 

@@ -9,25 +9,33 @@ export class BoatService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        // /api refers to students.js
+        // api refers to Boats.js
         return this.http.get<Boat[]>(appConfig.apiUrl + '/api/boats');
     }
 
     
     getById(_id: string) {
-        return this.http.get(appConfig.apiUrl + '/api/boats' + _id);
+        return this.http.get(appConfig.apiUrl + '/api/boats/' + _id);
     }
     
     create(boat: Boat) {
-        return this.http.post(appConfig.apiUrl + '/token/register', boat);
+        return this.http.post(appConfig.apiUrl + '/api/boats', boat);
     }
-    /*
-    update(user: User) {
-        return this.http.put(appConfig.apiUrl + '/users/' + user._id, user);
+
+    rentBoat(_id: string) {
+        return this.http.get(appConfig.apiUrl + '/api/boats/rent/' +_id);
+    }
+
+    expireBoat(_id: string) {
+        return this.http.get(appConfig.apiUrl + '/api/boats/expire/' +_id);
+    }
+    
+    update(boat: Boat) {
+        return this.http.put(appConfig.apiUrl + '/api/boats/' + boat.id, boat);
     }
 
     delete(_id: string) {
-        return this.http.delete(appConfig.apiUrl + '/api/users/' + _id);
+        return this.http.delete(appConfig.apiUrl + '/api/boats/' + _id);
     }
-    */
+    
 }
