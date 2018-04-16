@@ -3,10 +3,12 @@
     <p>Welcome to the Pacific Boat Club Dashboard</p>
     <h3>All registered users:</h3>
     <ul>
+        <div *ngIf="adminVisibleList">
         <li *ngFor="let user of users">
             {{user.email}} ({{user.firstName}} {{user.lastName}})
             - <a (click)="deleteUser(user._id)">Delete</a>
         </li>        <h2>List of Boats</h2>
+        </div>
 
         <!-- TODO: Boat Add Only for Admin -->
         <div *ngIf="adminVisible">

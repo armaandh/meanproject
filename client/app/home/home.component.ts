@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
     //adminVisible: true;
     users: User[] = [];
     boats: Boat[] = [];
+    adminVisibleList = true;
     adminVisible = true;
 
 
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
     authorizeBoat() {
         if(this.currentUser.role == "member" )
         {
+            this.adminVisibleList = !this.adminVisibleList;
             this.adminVisible = !this.adminVisible;
         }
     }
